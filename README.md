@@ -1,4 +1,4 @@
-# :warning 👷 TRAVAUX EN COURS 👷:warning
+# TRAVAUX EN COURS 
 
 ![logo](images/logo.webp)
 
@@ -12,6 +12,9 @@ https://www.shadertoy.com/
 
 L'objectif est de fournir une syntaxe simple :
 
+```
+url:hauteurXlargeur:texte/cheminVersFichiers:style
+```
 
 ## Apercu
 
