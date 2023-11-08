@@ -12,8 +12,7 @@ L'objectif est de fournir une syntaxe simple :
 
 url:hauteurXlargeur:texte/cheminVersFichiers:style
 
-
-## Aperçu
+## Apercu
 
 Pour avoir un aperçu de ce qui est possible de faire 
 
