@@ -1,0 +1,12 @@
+#! /bin/python3
+
+# remove the first and last character of a env variable then print it
+
+import os
+import sys
+
+def trim(s):
+    return s[1:-1]  
+
+if __name__ == "__main__":
+    print(trim(sys.argv[1]))

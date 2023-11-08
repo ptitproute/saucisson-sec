@@ -3,3 +3,5 @@
 source lib/chargeur.sh
 
 dossier=affichage chargeur categorie message
+dossier=wget chargeur extrait_OpenGl
+
