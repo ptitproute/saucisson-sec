@@ -1,0 +1,5 @@
+#! /bin/bash
+
+source lib/chargeur.sh
+
+dossier=affichage chargeur categorie message

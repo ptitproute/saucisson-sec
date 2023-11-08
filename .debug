@@ -1,0 +1,7 @@
+#! /bin/bash
+
+# Source tous les composants de lib
+for f in $(find ./lib); do
+    echo "$f :fichier sourcé"
+    source $f
+done

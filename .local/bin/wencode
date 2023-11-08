@@ -1,0 +1,17 @@
+#! /bin/python3
+
+import sys
+import urllib.parse
+
+def url_encode():
+    if len(sys.argv) > 1:
+        chaine = sys.argv[1]
+        encoded_strings = urllib.parse.quote_plus(chaine)
+        print(chaine)
+        return 0
+    else:
+        print("Err: str -> $1")
+        return 1
+
+if __name__ == "__main__":
+    url_encode()

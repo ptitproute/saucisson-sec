@@ -1,0 +1,41 @@
+![logo](images/logo.webp)
+
+# :warning 👷 TRAVAUX EN COURS 👷:warning   
+
+# Saucisson sec, une interface cli pour générer des transitions vidéos
+
+Ce repo à pour but de rassembler différentes sources / programmes pour simplifier la génération d'une page de transitions pour du format vidéos.
+
+Ces transitions sont générés via les shaders openGl que l'on retrouve sur le site de shadertoy : https://www.shadertoy.com/ et une incrustation textuelle via ffmpeg.
+
+L'objectif est de fournir une syntaxe simple : 
+
+url:hauteurXlargeur:texte/cheminVersFichiers:style
+
+
+## Aperçu
+
+Pour avoir un aperçu de ce qui est possible de faire 
+
+``` 
+./main --demo
+```
+
+## Tester une url de shadertoy
+
+Ou url est le chemin vers la page de shaders, vous pouvez tester l'url via :
+
+``` 
+./main --url "https://www.shadertoy.com/view/wtVyWK"
+```
+
+| Code de retours | Status          | message de sortie |
+| :--------------- |:---------------:| -----:|
+| Aligné à gauche  |   centré        |  Aligné à droite |
+
+## Fonctionnement
+
+Le programme vient récupérer le contenue de la page html, y exerce une extraction des balises <code>openGL</code> via l'expression régulière contenue dans la variable d'environnement $EXTRAIT_OPENGL_CODE.
+
+Il récupère ensuite les dimensions fournies pour leur envoyer au script python qui génère une videos à partir du code extrait et via les dimensions fournit. 
+

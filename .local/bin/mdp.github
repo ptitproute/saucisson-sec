@@ -1,0 +1,2 @@
+#!/bin/bash
+openssl enc -d -aes-256-cbc -in pbkdf2.10000.github.enc -pbkdf2 -iter 10000 -pass pass:${GITHUB_SECRET:=$(sudo cat /root/github_secret)} > $DOSSIER_COURANT/cle.prive.github && chmod 400 cle.prive.github 
