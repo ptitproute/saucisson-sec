@@ -10,7 +10,9 @@ Ces transitions sont générés via les shaders openGl que l'on retrouve sur le 
 
 L'objectif est de fournir une syntaxe simple : 
 
+``` 
 url:hauteurXlargeur:texte/cheminVersFichiers:style
+``` 
 
 ## Apercu
 
