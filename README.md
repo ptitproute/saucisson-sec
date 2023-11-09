@@ -23,6 +23,7 @@ Pour avoir un aperçu de ce qui est possible de faire
 ```
 ./main --demo
 ```
+> :warning Attention, pas encore pris en charge, pour un example regarder dans le dossier data/videos/final 
 
 ## Tester une url de shadertoy
 
