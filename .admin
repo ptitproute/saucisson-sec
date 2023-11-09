@@ -1,0 +1,81 @@
+#! /bin/bash
+
+#===================================================================================
+#
+#       FILE: .admin
+#       USAGE: source .admin
+#       Description: Contient des fonctions de manipulation de ce répertoire
+#       Autheur: Thibault MARCHAL
+#
+#
+#       Version: 1.0
+#       Licence: MIT
+#
+#===================================================================================
+
+#===================================================================================
+#
+#
+#  Supprime les relicats vidéos
+#
+#
+#===================================================================================
+
+
+remove_shader_videos(){
+    bash -c "
+    rm -rf data/videos/shader/*.{mp4,wav}
+    " >/dev/null 2>&1
+}
+
+remove_final_videos(){
+    bash -c "
+    rm -rf data/videos/final/*.{mp4,wav}
+    " >/dev/null 2>&1
+}
+
+remove_all_videos(){
+    bash -c "
+    rm -rf data/videos/{final,shader}/*.{mp4,wav}
+    " >/dev/null 2>&1
+}
+
+#===================================================================================
+#
+#
+#  Supprime les relicats openGl
+#
+#
+#===================================================================================
+
+remove_glsl(){
+    bash -c "
+    rm -rf openGl/*.glsl
+    " >/dev/null 2>&1
+}
+
+#===================================================================================
+#
+#
+#  Execute toutes les fonctions de la catégorie
+#
+#
+#===================================================================================
+
+remove_all(){
+    remove_videos
+    remove_glsl
+}
+
+cat << EOF
+
+$(echo -e "\e[1;33m remove :\e[0m")
+
+La fonction $(echo -e "\e[1;32m remove_videos \e[0m") supprime tous les relicats vidéos
+
+La fonction $(echo -e "\e[1;32m remove_glsl \e[0m") supprime tous les relicats openGl
+---
+
+La fonction $(echo -e "\e[1;32m remove_all \e[0m") execute toutes les fonctions ci-dessus
+
+EOF

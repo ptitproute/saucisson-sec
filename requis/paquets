@@ -3,3 +3,5 @@ zcat
 jq
 sed
 curl
+ffmpeg
+bc

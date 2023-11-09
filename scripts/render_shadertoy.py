@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/bin/python3
+
 # -*- coding: utf-8 -*-
 
 # Copyright (c) 2015, Alex J. Champandard

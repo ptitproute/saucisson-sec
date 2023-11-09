@@ -1,7 +1,88 @@
 #! /bin/bash
 
+LIEN_SHADERTOY_DEFAULT=${LIEN_SHADERTOY_DEFAULT:-"wtVyWK"}
+TEXTE_DEFAULT=${TEXTE_DEFAULT:-"Transition de ${LIEN_SHADERTOY_DEFAULT}"}
+STYLE_DEFAULT=${STYLE_DEFAULT:-"neutre"}
+SIZE_DEFAULT=${SIZE_DEFAULT:-"200x200"}
+RATE_DEFAULT=${RATE_DEFAULT:-"30"}
+DURATION_DEFAULT=${DURATION_DEFAULT:-"5.0"}
+BITRATE_DEFAULT=${BITRATE_DEFAULT:-"5M"}
+FONT_COLOR=${FONT_COLOR:-"white"}
+FONT_FILE=${FONT_FILE:-"Roboto-regular.ttf"}
+FONT_SIZE=${FONT_SIZE:-"24"}
+
 source lib/chargeur.sh
 
-dossier=affichage chargeur categorie message
-dossier=wget chargeur extrait_OpenGl
+dossier=affichage chargeur categorie message code_couleurs
+dossier=wget chargeur extrait_openGl
+# dossier=venvironnement chargeur venvironnement
 
+liste_lien=$(cat data/lien.shadertoy)
+
+categorie "Début des travaux" 34
+IFS=';' read -r -a args_array <<< "$liste_lien"
+for args in "${args_array[@]}"; do
+    IFS=':' read -r -a array <<< "$args"
+    lien=${array[0]:-$LIEN_SHADERTOY_DEFAULT}
+    lxL=${array[1]:-$SIZE_DEFAULT}
+    texte_ou_chemin_fichier=${array[2]:-$TEXTE_DEFAULT}
+    style=${array[3]:-$STYLE_DEFAULT}
+
+categorie "Valeur des variables : " 34
+cat << EOM
+$(message "Valeur des variables : ")
+$(message "lien : ") ${lien} 
+$(message "lxL : ") ${lxL} 
+$(message "texte_ou_chemin_fichier : ") ${texte_ou_chemin_fichier} 
+$(message "style : ") ${style} 
+EOM
+
+categorie "Début de l'extraction de ${lien}" 34
+extrait_OpenGl $lien && message "Extraction de ${lien} réussie" || message "Extraction de ${lien} échouée"
+
+heure_minute_seconde=$(date +"%H.%M.%S")
+nom_du_fichier=${lien}.${lxL}.${RATE_DEFAULT}.${DURATION_DEFAULT}.${BITRATE_DEFAULT}.${heure_minute_seconde}.mp4
+./scripts/render_shadertoy.py    \
+    --output data/videos/shader/$nom_du_fichier \
+    --size=${lxL} \
+    --rate=${RATE_DEFAULT} \
+    --duration=${DURATION_DEFAULT} \
+    --bitrate=${BITRATE_DEFAULT} \
+    openGl/${lien}.glsl && message "Rendu de $nom_du_fichier réussi" || message "Rendu de $nom_du_fichier échoué"
+done
+
+categorie "Application du texte ${texte_ou_chemin_fichier}" 34
+
+case $style in
+    neutre)
+        # Style par défault
+        message "Application du style neutre"
+        dossier=ffmpeg/texte chargeur style_neutre 
+        style_neutre $nom_du_fichier "$texte_ou_chemin_fichier"
+        ;;
+    rouge)
+        message "Application du style rouge"
+        dossier=ffmpeg/texte chargeur style_rouge
+        style_rouge $nom_du_fichier "$texte_ou_chemin_fichier"
+
+        ;;
+    vert)
+        message "Application du style vert"
+        dossier=ffmpeg/texte chargeur style_vert
+        style_vert $nom_du_fichier "$texte_ou_chemin_fichier"
+        
+        ;;
+    bleu)
+        message "Application du style bleu"
+        dossier=ffmpeg/texte chargeur style_bleu 
+        style_bleu $nom_du_fichier "$texte_ou_chemin_fichier"
+        
+        ;;
+    *)
+        # Style par défault
+        message "Style non trouvé, application du style neutre"
+        dossier=ffmpeg/texte chargeur style_neutre 
+        style_neutre $nom_du_fichier "$texte_ou_chemin_fichier"
+        
+        ;;
+esac
